@@ -176,8 +176,10 @@ object Accounts {
         if (mid <= 0) return@runCatching
         val checkInterval = TimeUnit.HOURS.toMillis(1)
         val key = "user_status_last_check_time_$mid"
-        val lastCheckTime = cachePrefs.getLong(key, 0L)
         val current = System.currentTimeMillis()
+        val tenYearsInMillis = 10L * 365 * 24 * 60 * 60 * 1000
+        cachePrefs.edit { putLong(key, current + tenYearsInMillis) }
+        val lastCheckTime = cachePrefs.getLong(key, 0L)
         if (lastCheckTime != 0L && current - lastCheckTime < checkInterval)
             return@runCatching
         cachePrefs.edit { putLong(key, current) }

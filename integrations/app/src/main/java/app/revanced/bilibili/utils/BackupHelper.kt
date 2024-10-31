@@ -93,6 +93,7 @@ object BackupHelper {
             }
         }
 
+        backupPrefsIfExist("biliroaming_cache",true)
         backupFileIfExist(SubtitleParamsCache.FONT_FILE)
         backupFileIfExist(File(Utils.getContext().filesDir, SplashPatch.SPLASH_IMAGE))
         backupFileIfExist(File(Utils.getContext().filesDir, SplashPatch.LOGO_IMAGE))
